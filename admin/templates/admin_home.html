@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 홈</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-100 font-sans p-6">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold text-green-700 mb-4">관리자 홈</h1>
+    <ul class="space-y-2">
+      <li><a href="/admin/login" class="text-blue-600 hover:underline">🔐 관리자 로그인</a></li>
+      <li><a href="/admin/reviews" class="text-blue-600 hover:underline">📋 후기 목록 보기</a></li>
+      <li><a href="/admin/reservations" class="text-blue-600 hover:underline">📅 예약 목록 보기</a></li>
+    </ul>
+  </div>
+</body>
+</html>

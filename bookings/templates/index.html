@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>라끄베르 스웨디시 마사지</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <style>
+    body {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+    body.loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body onload="document.body.classList.add('loaded'); AOS.init({ duration: 700, once: true })" class="bg-gray-50 text-gray-800 font-sans">
+  <!-- 헤더 -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="/static/images/logo.png" alt="라끄베르 로고" class="h-12 w-auto drop-shadow-md rounded-md">
+        <h1 class="text-2xl font-bold text-green-700">스웨디시 하우스</h1>
+      </div>
+      <nav class="space-x-4">
+        <a href="#home" class="text-gray-600 hover:text-green-600 transition">홈</a>
+        <a href="#services" class="text-gray-600 hover:text-green-600 transition">서비스</a>
+        <a href="#reviews" class="text-gray-600 hover:text-green-600 transition">후기</a>
+        <a href="#contact" class="text-gray-600 hover:text-green-600 transition">오시는 길</a>
+        <a href="/reserve" class="text-gray-600 hover:text-green-600 transition">예약</a>
+        <a href="/modify_lookup" class="text-sm text-green-600 hover:underline">예약 변경</a>
+        <a href="/admin/login" class="text-gray-600 hover:text-red-500 font-semibold transition">관리자</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero 섹션 -->
+  <section id="home" class="relative bg-cover bg-center h-screen" style="background-image: url('/static/images/hero.png');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white text-center px-4" data-aos="fade-up">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">스웨디시 마사지로 몸과 마음의 밸런스를</h2>
+      <p class="text-lg mb-6 max-w-2xl">고요한 힐링의 공간, 전문 테라피스트의 정성 어린 터치로 지친 일상에 쉼표를 선물하세요.</p>
+      <div>
+        <a href="/reserve" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition transform hover:scale-105">예약하러 가기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 서비스 섹션 -->
+  <section id="services" class="max-w-6xl mx-auto px-4 py-16">
+    <h3 class="text-3xl font-bold text-center mb-12" data-aos="fade-up">라끄베르 마사지 샵 소개</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white shadow-md rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+        <img src="/static/images/aroma.png" alt="아로마 마사지" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h4 class="text-lg font-semibold mb-2">전문 테라피스트의 최고의 서비스</h4>
+          <p class="text-sm text-gray-600">전문 교육을 이수한 젊은 한국 여성으로만 구성하여 심신을 편안하게 해주는 힐링 마사지입니다.</p>
+        </div>
+      </div>
+      <div class="bg-white shadow-md rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+        <img src="/static/images/spa.png" alt="스파 케어" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h4 class="text-lg font-semibold mb-2">실내 환경 분위기</h4>
+          <p class="text-sm text-gray-600">깨끗하고 고급스러운 분위기로 쾌적하고 편안한 마사지를 즐기실 수 있습니다.</p>
+        </div>
+      </div>
+      <div class="bg-white shadow-md rounded-lg overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+        <img src="/static/images/deep.png" alt="딥티슈 마사지" class="w-full h-48 object-cover">
+        <div class="p-6">
+          <h4 class="text-lg font-semibold mb-2">청결과 위생관리</h4>
+          <p class="text-sm text-gray-600">각 실 개별 욕실 준비와 항상 청결한 용품을 구비하여 위생과 편안함을 최우선으로 합니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 후기 섹션 -->
+  <section id="reviews" class="bg-gray-100 py-16 px-4">
+    <div class="max-w-5xl mx-auto" data-aos="fade-up">
+      <h3 class="text-3xl font-bold text-center mb-10">고객 후기</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded shadow">
+          <p class="text-gray-700">“지금까지 받아본 마사지 중 최고였어요. 분위기도 좋고, 직원분들이 너무 친절하셨어요.”</p>
+          <p class="mt-4 text-sm text-gray-500 text-right">– 김지은</p>
+        </div>
+        <div class="bg-white p-6 rounded shadow">
+          <p class="text-gray-700">“스트레스가 확 날아갔어요. 라끄베르만의 아로마 향이 정말 힐링이었어요.”</p>
+          <p class="mt-4 text-sm text-gray-500 text-right">– 박성호</p>
+        </div>
+        <div class="mt-8 md:col-span-2 text-center">
+          <a href="/reviews/form" class="inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition">➕ 후기 작성하기</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 오시는 길 섹션 -->
+  <section id="contact" class="py-16 px-4 bg-white">
+    <div class="max-w-5xl mx-auto text-center" data-aos="fade-up">
+      <h3 class="text-3xl font-bold mb-6">오시는 길</h3>
+      <p class="text-gray-700 mb-4">서울 송파구 오금로11길 11-8, 4층 (라끄베르 스웨디시)</p>
+      <p class="text-gray-600 mb-8">지하철 2,8호선 잠실역 10번출구 도보 3분 거리</p>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3164.69976208173!2d127.10615247499022!3d37.514998827083105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca573ec2299c5%3A0xbebb7453fcb3b0fb!2z7ISc7Jq47Yq567OE7IucIOyGoe2MjOq1rCDrsKnsnbTrj5kgMzQtMiA0MDXtmLg!5e0!3m2!1sko!2skr!4v1748424448171!5m2!1sko!2skr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="bg-green-900 text-white py-6">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <p class="text-sm">&copy; 2025 라끄베르 스웨디시. 모든 권리 보장.</p>
+      <p class="text-sm mt-2">주소: 서울 송파구 방이동 34-2, 4층 | 연락처: 010-4639-2800</p>
+    </div>
+  </footer>
+</body>
+</html>

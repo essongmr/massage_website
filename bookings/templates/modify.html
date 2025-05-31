@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>예약 변경</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-100 font-sans p-6">
+  <div class="max-w-4xl mx-auto bg-white rounded-lg shadow p-8">
+    <h1 class="text-2xl font-bold text-green-700 mb-6 text-center">예약 변경</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+      <!-- 왼쪽: 기존 예약 내용 표시 -->
+      <div class="bg-gray-50 p-4 rounded shadow flex flex-col justify-between">
+        <div>
+          <h2 class="font-semibold text-lg mb-2">기존 예약 정보</h2>
+          <p><strong>이름:</strong> {{ reservation[1] }}</p>
+          <p><strong>전화번호:</strong> {{ reservation[2] }}</p>
+          <p><strong>날짜:</strong> {{ reservation[3] }}</p>
+          <p><strong>시간:</strong> {{ reservation[4] }}</p>
+        </div>
+        <!-- 예약 취소 버튼 -->
+        <form method="POST" action="/modify/{{ reservation[5] }}">
+          <input type="hidden" name="action" value="cancel">
+          <button type="submit" class="w-full h-12 mt-4 bg-red-500 text-white text-base rounded hover:bg-red-600">예약 취소</button>
+        </form>
+      </div>
+
+      <!-- 오른쪽: 예약 변경 폼 -->
+      <div class="flex flex-col justify-between">
+        <div>
+          <h2 class="font-semibold text-lg mb-2">변경할 예약 정보</h2>
+          <form method="POST" action="/modify/{{ reservation[5] }}">
+            <input type="hidden" name="action" value="update">
+            <label class="block text-sm font-medium mt-2">날짜</label>
+            <input type="date" name="date" required class="w-full border border-gray-300 rounded px-4 py-2">
+
+            <label class="block text-sm font-medium mt-4">시간</label>
+            <input type="time" name="time" required class="w-full border border-gray-300 rounded px-4 py-2">
+
+            <!-- 예약 변경 버튼 -->
+            <button type="submit" class="w-full h-12 mt-4 bg-green-600 text-white text-base rounded hover:bg-green-700">예약 변경</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

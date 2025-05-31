@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후기 목록 - 관리자 페이지</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script>
+    function filterTable() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const rows = document.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(input) ? "" : "none";
+      });
+    }
+  </script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="max-w-7xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center text-green-700 mb-8">후기 목록</h1>
+
+    <!-- 검색 필터 -->
+    <div class="mb-4 flex justify-between items-center">
+      <input id="searchInput" type="text" onkeyup="filterTable()" placeholder="이름, 내용 등 검색..." class="border rounded px-4 py-2 w-full max-w-md">
+    </div>
+
+    <div class="overflow-x-auto bg-white rounded shadow">
+      <table class="min-w-full text-sm text-left">
+        <thead class="bg-green-600 text-white">
+          <tr>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">이름</th>
+            <th class="px-4 py-2">내용</th>
+            <th class="px-4 py-2">평점</th>
+            <th class="px-4 py-2">공개여부</th>
+            <th class="px-4 py-2">관리</th>
+          </tr>
+        </thead>
+        <tbody id="reviewBody">
+          {% for r in reviews %}
+          <tr class="border-b hover:bg-gray-50">
+            <td class="px-4 py-2">{{ r[0] }}</td>
+            <td class="px-4 py-2">{{ r[1] }}</td>
+            <td class="px-4 py-2">{{ r[2] }}</td>
+            <td class="px-4 py-2">{{ r[3] }}</td>
+            <td class="px-4 py-2">{{ '공개' if r[4] else '비공개' }}</td>
+            <td class="px-4 py-2 space-x-2">
+              <form method="POST" action="/admin/reviews/toggle/{{ r[0] }}" style="display:inline">
+                <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 text-xs">
+                  {{ '비공개' if r[4] else '공개' }} 전환
+                </button>
+              </form>
+              <form method="POST" action="/admin/reviews/delete/{{ r[0] }}" style="display:inline" onsubmit="return confirm('정말 삭제하시겠습니까?');">
+                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 text-xs">삭제</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6 text-center">
+      <a href="/admin" class="text-green-600 hover:underline">← 관리자 홈으로</a>
+    </div>
+  </div>
+</body>
+</html>
